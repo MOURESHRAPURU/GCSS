@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Counselor Dashboard - GCSS{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Counselor Dashboard</h2>
+
+    <!-- Welcome Card -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Welcome, {{ current_user.username }}!</h5>
+            <p class="card-text">You are logged in as a counselor.</p>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Active Cases</h5>
+                    <h2 class="card-text text-primary">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Reviews</h5>
+                    <h2 class="card-text text-warning">0</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Completed Cases</h5>
+                    <h2 class="card-text text-success">0</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="mb-0">Recent Activity</h3>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">No recent activity to display.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

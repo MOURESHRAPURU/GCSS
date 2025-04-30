@@ -1,0 +1,73 @@
+<!-- templates/admin/patient_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Patient Details</h2>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Personal Information</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ patient.name }}</p>
+                <p><strong>Contact:</strong> {{ patient.contact_details }}</p>
+                <p><strong>Medical History:</strong> {{ patient.medical_history }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Family History</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Relationships:</strong> {{ family_history.relationships }}</p>
+                <p><strong>Genetic Conditions:</strong> {{ family_history.genetic_conditions }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Genetic Data</h3>
+            </div>
+            <div class="card-body">
+                <p><strong>Gene Sequence:</strong> {{ genetic_data.gene_sequence }}</p>
+                <p><strong>Mutations:</strong> {{ genetic_data.mutations }}</p>
+                <p><strong>Test Results:</strong> {{ genetic_data.test_results }}</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Risk Assessment</h3>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                <div id="reportSection" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function generateReport() {
+        // Add AJAX call to backend to generate report
+        fetch(`/api/generate_report/{{ patient.id }}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('reportSection').innerHTML = `
+                    <div class="alert alert-success">
+                        Report generated successfully! 
+                        <a href="${data.report_url}" class="btn btn-sm btn-primary ms-2">Download Report</a>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                document.getElementById('reportSection').innerHTML = `
+                    <div class="alert alert-danger">Failed to generate report.</div>
+                `;
+            });
+    }
+</script>
+{% endblock %}
